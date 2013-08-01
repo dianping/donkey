@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/dianping/!svn/ver/53210/platform/middleware/branches/donkey/donkey-service/src/main/java/com/dianping/donkey/databaseacess
+END
+DatabaseAcess.java
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/svn/dianping/!svn/ver/52326/platform/middleware/branches/donkey/donkey-service/src/main/java/com/dianping/donkey/databaseacess/DatabaseAcess.java
+END
+MongoDatabaseAcessImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/svn/dianping/!svn/ver/52326/platform/middleware/branches/donkey/donkey-service/src/main/java/com/dianping/donkey/databaseacess/MongoDatabaseAcessImpl.java
+END
+SqlDatabaseAcessImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 153
+/svn/dianping/!svn/ver/53210/platform/middleware/branches/donkey/donkey-service/src/main/java/com/dianping/donkey/databaseacess/SqlDatabaseAcessImpl.java
+END
+DPDonkey.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/svn/dianping/!svn/ver/53094/platform/middleware/branches/donkey/donkey-service/src/main/java/com/dianping/donkey/databaseacess/DPDonkey.java
+END

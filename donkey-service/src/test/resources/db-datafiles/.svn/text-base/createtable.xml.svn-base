@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databases>
+	<database name="id0">
+		<tables>
+			<table name="DP_Donkey">
+		    <![CDATA[
+		    create table DP_Donkey (Name varchar(100) not NULL primary key, Seq bigint(20), AddTime datetime, UpdateTime datetime)
+		    ]]>
+			</table>
+		</tables>
+	</database>
+	<database name="id1">
+		<tables>
+			<table name="DP_Donkey">
+		    <![CDATA[
+		    create table DP_Donkey (Name varchar(100) not NULL primary key, Seq bigint(20), AddTime datetime, UpdateTime datetime)
+		    ]]>
+			</table>
+		</tables>
+	</database>
+</databases>

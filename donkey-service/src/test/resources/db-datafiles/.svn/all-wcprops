@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/dianping/!svn/ver/52895/platform/middleware/branches/donkey/donkey-service/src/test/resources/db-datafiles
+END
+data.xml
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/dianping/!svn/ver/52895/platform/middleware/branches/donkey/donkey-service/src/test/resources/db-datafiles/data.xml
+END
+createtable.xml
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/dianping/!svn/ver/52895/platform/middleware/branches/donkey/donkey-service/src/test/resources/db-datafiles/createtable.xml
+END

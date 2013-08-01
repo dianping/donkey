@@ -1,0 +1,18 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>donkey-all</artifactId>
+    <groupId>com.dianping.donkey</groupId>
+    <version>0.1.2</version>
+  </parent>
+  <groupId>com.dianping.donkey</groupId>
+  <artifactId>${donkey-remote.aid}</artifactId>
+  <version>${donkey-remote.version}</version>
+  <name>${donkey-remote.name}</name>
+  <dependencies>
+  	<dependency>
+  		<groupId>com.dianping.lion</groupId>
+  		<artifactId>lion-client</artifactId>
+  	</dependency>
+  </dependencies>
+</project>

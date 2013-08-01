@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<database name="id0">
+		<script>
+		<![CDATA[
+		insert into DP_Donkey (Name,Seq,AddTime,UpdateTime) values ('donkey.service.group.test', 1000, NOW(), NOW())
+		]]>
+		</script>
+	</database>
+	<database name="id1">
+		<script>
+		<![CDATA[
+		insert into DP_Donkey (Name,Seq,AddTime,UpdateTime) values ('donkey.service.group.test', 1000, NOW(), NOW())
+		]]>
+		</script>
+	</database>
+</dataset>

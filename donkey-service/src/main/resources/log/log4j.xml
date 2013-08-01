@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration PUBLIC "-//log4j/log4j Configuration//EN" "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/"
+	threshold="null" debug="null">
+
+	<appender name="avatarAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<!-- <param name="Threshold" value="INFO" /> -->
+		<param name="File" value="/data/applogs/donkey-service/logs/avatar.log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[donkey-service]%d %-5p [%c] %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="appAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<!-- <param name="Threshold" value="WARN" /> -->
+		<param name="File" value="/data/applogs/donkey-service/logs/app.log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[donkey-service]%d %-5p [%c] %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="HAWK" class="com.dianping.hawk.HawkAppender">
+		<param name="key1" value="donkey-service" />
+		<param name="cacheTimeMillis" value="10000" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d - %c -%-4r [%t] %-5p %x - %m%n" />
+		</layout>
+	</appender>
+
+	<logger name="com.dianping.avatar" additivity="false">
+		<appender-ref ref="avatarAppender" />
+		<appender-ref ref="HAWK" />
+	</logger>
+
+	<logger name="java.sql">
+		<level value="WARN" />
+	</logger>
+
+	<logger name="org.springframework.jms">
+		<level value="ERROR" />
+	</logger>
+
+	<logger name="org.apache.activemq">
+		<level value="ERROR" />
+	</logger>
+
+	<root>
+		<level value="INFO" />
+		<appender-ref ref="appAppender" />
+		<appender-ref ref="HAWK" />
+	</root>
+
+</log4j:configuration>
