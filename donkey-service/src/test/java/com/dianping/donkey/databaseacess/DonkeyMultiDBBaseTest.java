@@ -25,7 +25,7 @@ import org.w3c.dom.NodeList;
 /**
  * TODO Comment of ZebraMultiDBBaseTestCase
  * 
- * @author Leo Liang
+ * @author Hu Peng
  * 
  */
 public abstract class DonkeyMultiDBBaseTest {

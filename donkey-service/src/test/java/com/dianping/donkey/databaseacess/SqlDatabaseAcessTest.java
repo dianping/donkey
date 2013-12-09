@@ -1,18 +1,12 @@
 package com.dianping.donkey.databaseacess;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-
 import javax.sql.DataSource;
 
 import junit.framework.Assert;
 
 import org.junit.Test;
 
-import com.mchange.util.AssertException;
-
-public class SqlDatabaseAcessTest extends DonkeyMultiDBBaseTestCase {
+public class SqlDatabaseAcessTest extends DonkeyMultiDBBaseTest {
 	@Override
 	protected String getDBBaseUrl() {
 		return "jdbc:h2:mem:";

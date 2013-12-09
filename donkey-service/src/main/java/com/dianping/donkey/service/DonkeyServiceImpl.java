@@ -11,6 +11,9 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 
+import com.dianping.cat.Cat;
+import com.dianping.cat.message.Message;
+import com.dianping.cat.message.Transaction;
 import com.dianping.donkey.DonkeyService;
 import com.dianping.donkey.databaseacess.DatabaseAcess;
 import com.dianping.donkey.memorytable.DatabaseTable;
@@ -437,7 +440,10 @@ public class DonkeyServiceImpl implements BeanFactoryAware, DonkeyService {
 	public long nextID(final String domain, String key) {
 		long begintime = System.currentTimeMillis();
 		long result = 0;
+		Transaction trans = Cat.getProducer().newTransaction("nextID", "nextID");
 		if (domain == null || key == null) {
+			trans.setStatus("domain or key NULL");
+			trans.complete();
 			return DonkeyService.Status.INVALIDKEY.code();
 		}
 		long tmpid;
@@ -447,9 +453,13 @@ public class DonkeyServiceImpl implements BeanFactoryAware, DonkeyService {
 				try {
 					if (checkConnection(domain) == DonkeyService.Status.INVALIDKEY
 							.code()) {
+						trans.setStatus("invalid key");
+						trans.complete();
 						return DonkeyService.Status.INVALIDKEY.code();
 					}
 				} catch (Exception e) {
+					trans.setStatus("Connect database error!");
+					trans.complete();
 					log.error("Connect database error!");
 					return DonkeyService.Status.INVALIDKEY.code();
 				}
@@ -462,6 +472,8 @@ public class DonkeyServiceImpl implements BeanFactoryAware, DonkeyService {
 					log.info("Get " + name + " nextid success, use time "
 							+ (System.currentTimeMillis() - begintime));
 				}
+				trans.setStatus(Message.SUCCESS);
+				trans.complete();
 				return result;
 			}
 		}
@@ -520,6 +532,7 @@ public class DonkeyServiceImpl implements BeanFactoryAware, DonkeyService {
 					if (tmpid < memoryMap.get(name).getLastNum()) {
 						log.info("Get " + name + " nextid success, use time "
 								+ (System.currentTimeMillis() - begintime));
+						trans.setStatus(Message.SUCCESS);
 						return tmpid;
 					} else {
 						while (true) {
@@ -591,6 +604,7 @@ public class DonkeyServiceImpl implements BeanFactoryAware, DonkeyService {
 			// not in the memorytable
 			else {
 				if (!routeMap.containsKey(domain)) {
+					trans.setStatus("invalid key");
 					return DonkeyService.Status.INVALIDKEY.code();
 				}
 				MemoryTableItem mItem = new MemoryTableItem();
@@ -603,10 +617,12 @@ public class DonkeyServiceImpl implements BeanFactoryAware, DonkeyService {
 				try {
 					if (checkConnection(domain) == DonkeyService.Status.INVALIDKEY
 							.code()) {
+						trans.setStatus("invalid key");
 						return DonkeyService.Status.INVALIDKEY.code();
 					}
 				} catch (Exception e) {
 					log.error("Connect database error!");
+					trans.setStatus("Connect database error!");
 					return DonkeyService.Status.INVALIDKEY.code();
 				}
 				tmpid = dbMap.get(routeMap.get(domain).getLocation())
@@ -615,6 +631,7 @@ public class DonkeyServiceImpl implements BeanFactoryAware, DonkeyService {
 				if (tmpid == DonkeyService.Status.GETFAIL.code()) {
 					log.info("Get " + name + " nextid fail, use time "
 							+ (System.currentTimeMillis() - begintime));
+					trans.setStatus("get nextID fail!");
 					return DonkeyService.Status.GETFAIL.code();
 				}
 				mItem.setLastNum(tmpid + batchSize);
@@ -623,10 +640,12 @@ public class DonkeyServiceImpl implements BeanFactoryAware, DonkeyService {
 				memoryMap.put(name, mItem);
 				log.info("Get " + name + " nextid success, use time "
 						+ (System.currentTimeMillis() - begintime));
+				trans.setStatus(Message.SUCCESS);
 				return tmpid;
 
 			}
 		} finally {
+			trans.complete();
 			unlockmemoryMap(name);
 		}
 	}

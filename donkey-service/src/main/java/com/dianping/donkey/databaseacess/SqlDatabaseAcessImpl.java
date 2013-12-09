@@ -9,6 +9,9 @@ import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
 
+import com.dianping.cat.Cat;
+import com.dianping.cat.message.Message;
+import com.dianping.cat.message.Transaction;
 import com.dianping.donkey.DonkeyService;
 import com.dianping.donkey.service.DonkeyServiceImpl;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
@@ -178,6 +181,7 @@ public class SqlDatabaseAcessImpl implements DatabaseAcess {
 			Connection conn = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
+			Transaction trans = Cat.getProducer().newTransaction("SQL", "getSomeID");
 			try {
 				conn = (Connection) ds.getConnection();
 				conn.setAutoCommit(false);
@@ -209,8 +213,10 @@ public class SqlDatabaseAcessImpl implements DatabaseAcess {
 				pstmt.executeUpdate();
 				conn.commit();
 				conn.setAutoCommit(true);
+				trans.setStatus(Message.SUCCESS);
 				return id - num;
 			} catch (SQLException e) {
+				trans.setStatus(e);
 				try {
 					log.error("Operate database fail when get " + key
 							+ "`s ID.", e);
@@ -223,6 +229,7 @@ public class SqlDatabaseAcessImpl implements DatabaseAcess {
 				}
 
 			} finally {
+				trans.complete();
 				if (rs != null) {
 					try {
 						rs.close();
